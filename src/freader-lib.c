@@ -4,9 +4,9 @@ void clean(
     int size
     )   
 {
-    fputs("\r", stdout);
+    putchar('\r');
     PRINTER(' ', size);
-    fputs("\r", stdout);
+    putchar('\r');
 }
 
 void centerOut(

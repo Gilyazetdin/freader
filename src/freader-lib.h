@@ -1,14 +1,13 @@
 #ifndef FREADER_LIB
 #define FREADER_LIB
 
-#define UNIX
-
 // Headers
 
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-
+#include <wchar.h>
+#include "freader-compile-args.h"
 // // // //
 
 // Macros
@@ -21,22 +20,24 @@
 
 #ifdef WINDOWS
 #include <windows.h>
+#include <locale.h>
 #define sleep(a) Sleep((a))
 #endif
 
 #ifdef UNIX
+typedef char BOOL;
 #include <unistd.h>
 #define sleep(a) usleep((a) * 1000) // ... because there are MICROseconds.
 #endif
 
-#define BOOL char
+typedef unsigned int uint;
 #define TRUE 1
 #define FALSE 0
 
 // Displays a certain number of spaces. (Inline functions for gays)
 #define PRINTER(THIS, HOW_MANY) {for(int i=0;i<(HOW_MANY);i++){putchar(THIS);}fflush(stdout);} 
 
-#define ERROR(a) puts(a);exit(-1)
+#define PERROR(a) puts(a);exit(-1)
 
 // // // //
 
