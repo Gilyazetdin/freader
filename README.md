@@ -1,11 +1,11 @@
 # FReader
 ## fast reading in console
-
-This program will help you by very fast reading **.txt** file (another formats will be added later) in terminal.
-
-FReader is program for fast reading files in console.
-Usage:
-**freader** -(*ARGUMENT NAME*) (*VALUE*)
+    
+This program will help you by very fast reading **.txt** file (another formats will be added later) in terminal.   
+   
+FReader is program for fast reading files in console.   
+Usage:   
+```freader -(ARGUMENT NAME) (VALUE)```    
 
 ```-len```      
 -> set terminal buffer length (nececcary for correct center-display). Standard value is 100.     
