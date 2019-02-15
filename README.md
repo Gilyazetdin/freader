@@ -7,7 +7,11 @@ FReader is program for fast reading files in console.
 Usage:
 **freader** -(*ARGUMENT NAME*) (*VALUE*)
 
-**-len**   -> set terminal buffer length (nececcary for correct center-display). Standard value is 100.  
-**-file**  -> set file name, where program will get text for displaying.  
-**-pause** -> set pause duration for each word in miliseconds. Standart value is 500.  
-**-help**  -> show this text.  
+```-len```      
+-> set terminal buffer length (nececcary for correct center-display). Standard value is 100.     
+```-file```      
+-> set file name, where program will get text for displaying.    
+```-pause```    
+-> set pause duration for each word in miliseconds. Standart value is 500.    
+```-help```  
+-> show this text.    
