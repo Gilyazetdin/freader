@@ -8,8 +8,8 @@
 
 int main(int argc, char** argv)
 {
-    #ifdef WINDOWS // For 
-    setlocale(LC_ALL, "");
+    #ifdef WINDOWS 
+    SetConsoleOutputCP(65001); // UTF-8
     #endif
 
     // This variables will init from command-args
@@ -18,53 +18,33 @@ int main(int argc, char** argv)
     char file_name[FILENAME_MAX];
     BOOL is_file_name_init = FALSE;
 
-    int pause = 500;
+    int pause = 500; // stdvalue
 
     for (int i = 1; i < argc; i++)
     {
-        if (i >= argc) // Because there are some jokes with i
+        if (!strcmp(argv[i], "-len"))
         {
-            break;  
-        }
-
-        if (!strcmp(argv[i], "-len")) // terminal-size
-        {
-            if (argv[++i] == NULL)
-            {
-                PERROR("There are not terminal buffer size after -len!");
-            }
-
             terminal_size = atoi(argv[++i]);
-            i++;
         }
-        else if (!strcmp(argv[i], "-file")) // file-name
+        else if (!strcmp(argv[i], "-file"))
         {
-            if (argv[++i] == NULL)
-            {
-                PERROR("There are not file name after -file!");
-            }
-            strcpy(file_name, argv[i]);
+            strcpy(file_name, argv[++i]);
             is_file_name_init = TRUE;
-            i++;
         }
         else if (!strcmp(argv[i], "-pause"))
         {
-            if (argv[++i] == NULL)
-            {
-                PERROR("There are not pause value after -pause!");
-            }
-            pause = atoi(argv[i]);
-            i++;
+            pause = atoi(argv[++i]);
         }
         else if (!strcmp(argv[i], "-help"))
-        {   
+        {
             puts(help_text);
         }
         else
         {
             PERROR("Incorrect argument!");
-        }
+        }                
     }
+
 
     // Checking for correct values
     if (is_file_name_init == FALSE)
@@ -75,21 +55,30 @@ int main(int argc, char** argv)
     FILE* input;
     if ((input = fopen(file_name, "r")) == NULL)
     {
-        PERROR("There are not any file with this name!");
+        printf("There are not any file with \"%s\" name!", file_name);
+        exit(-1);
     }
     
-    
-    int c; // Because EOF bigger than char
-    char buf[WORD_LEN_MAX]; // For words
-    int buf_count = 0; // With every new char in word - this counter will grow
-    while ((c = fgetc(input)) != EOF)
+    // Because EOF bigger than char
+    int c; 
+    // For words
+    char buf[WORD_LEN_MAX]; 
+    // With every new char in word - this counter will grow
+    int buf_count = 0; 
+    while (TRUE)
     {
-        if (c == ' ' || c == '\n')
+        c = fgetc(input);
+        BOOL was_eof = FALSE;
+        if (c == EOF)
         {
-            buf[buf_count] = '\0'; // There are can be garbage
+            was_eof = TRUE;
+        }
+        if (c == ' ' || c == '\n' || was_eof)
+        {
+            buf[buf_count] = '\0'; // Garbage
 
             centerOut(buf, buf_count, terminal_size);
-            fflush(stdout); // to see this text in pause
+            fflush(stdout); //To see this text in pause
             sleep(pause);
             
             clean(terminal_size - buf_count); 
@@ -100,6 +89,10 @@ int main(int argc, char** argv)
         else
         {
             buf[buf_count++] = (char)c;
+        }
+        if (was_eof)
+        {
+            break;
         }
     }
 

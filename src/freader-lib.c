@@ -23,9 +23,10 @@ void centerOut(
 
 const char* const help_text = // Text for -help argument
 "FReader is program for fast reading files in console. Created by Dioderoid."
-"Usage:"
-"./freader.out -[ARGUMENT NAME] [VALUE]"
-"-len   -> set terminal buffer length (nececcary for correct center-display). Standard value is 100."
-"-file  -> set file name, where program will get text for displaying"
-"-pause -> set pause duration for each word in miliseconds. Standart value is 500."
-"-help  -> show this text\n";
+"Usage:\n"
+"./freader.out -[ARGUMENT NAME] [VALUE]\n"
+"-len   -> set terminal buffer length (nececcary for correct center-display). Standard value is 100.\n"
+"-file  -> set file name, where program will get text for displaying\n"
+"-pause -> set pause duration for each word in miliseconds. Standart value is 500.\n"
+"-help  -> show this text\n\n";
+

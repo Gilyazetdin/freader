@@ -19,8 +19,8 @@
 */
 
 #ifdef WINDOWS
-#include <windows.h>
-#include <locale.h>
+#include<windows.h>
+
 #define sleep(a) Sleep((a))
 #endif
 
@@ -53,7 +53,7 @@ void centerOut(
     int s_size, // Size of string
     int out_size // Size of terminal buffer
 );
- 
+
 // // // //
 
 // Constants
